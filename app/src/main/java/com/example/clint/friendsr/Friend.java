@@ -3,6 +3,7 @@ package com.example.clint.friendsr;
 import java.io.Serializable;
 
 public class Friend implements Serializable {
+
     private String name, bio;
     private int drawableId;
     private float rating;
@@ -23,6 +24,10 @@ public class Friend implements Serializable {
 
     public String getBio() {
         return bio;
+    }
+
+    public int getDrawableId() {
+        return drawableId;
     }
 }
 
