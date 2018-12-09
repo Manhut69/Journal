@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".InputActivity">
+
+    <EditText
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Title" />
+
+    <EditText
+        android:id="@+id/storyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Content" />
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_weight="0"
+        app:rowCount="1">
+
+        <ImageButton
+            android:id="@+id/squidAngry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="makeEntry"
+            app:srcCompat="@drawable/squidangry" />
+
+        <ImageButton
+            android:id="@+id/squidConfused"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="makeEntry"
+            app:srcCompat="@drawable/squidconfused" />
+
+        <ImageButton
+            android:id="@+id/squidGlad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="makeEntry"
+            app:srcCompat="@drawable/squidglad" />
+
+        <ImageButton
+            android:id="@+id/squidScared"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="makeEntry"
+            app:srcCompat="@drawable/squidscared" />
+    </android.support.v7.widget.GridLayout>
+
+</LinearLayout>
