@@ -32,7 +32,6 @@ public class EntryAdapter extends ResourceCursorAdapter {
         TextView timestamp = view.findViewById(R.id.timestamp);
         ImageView mood = view.findViewById(R.id.mood);
 
-        Log.d("_id", cursor.getString(cursor.getColumnIndex("_id")));
         title.setText(cursor.getString(cursor.getColumnIndex("title")));
         content.setText(cursor.getString(cursor.getColumnIndex("content")));
         timestamp.setText(cursor.getString(cursor.getColumnIndex("timestamp")));

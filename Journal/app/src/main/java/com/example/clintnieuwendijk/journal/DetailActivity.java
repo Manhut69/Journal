@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Long id = getIntent().getLongExtra("id", 1);
         db = EntryDatabase.getInstance(getApplicationContext());
+        Log.d("ID = ", Long.toString(id));
 
         TextView title = findViewById(R.id.titleDetailView);
         TextView content = findViewById(R.id.contentDetailView);
@@ -24,6 +26,7 @@ public class DetailActivity extends AppCompatActivity {
         ImageView mood = findViewById(R.id.moodDetailView);
 
         Cursor cursor = db.selectByID(id);
+        cursor.moveToFirst();
         title.setText(cursor.getString(cursor.getColumnIndex("title")));
         content.setText(cursor.getString(cursor.getColumnIndex("content")));
         timestamp.setText(cursor.getString(cursor.getColumnIndex("timestamp")));

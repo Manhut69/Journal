@@ -2,13 +2,13 @@ package com.example.clintnieuwendijk.journal;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,15 +50,23 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public class SnackBarListener implements View.OnClickListener {
+        long l;
 
-    public void confirmButtonClick(View v) {
-        Log.d("Confirm", "Clicked");
+        SnackBarListener(long l) {
+            this.l = l;
+        }
+
+        @Override
+        public void onClick(View v) {
+            db.delete(l);
+            updateData();
+        }
     }
 
     private class OnItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Log.d(Long.toString(l), Integer.toString(i));
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);
             intent.putExtra("id", l);
             startActivity(intent);
@@ -68,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private class OnItemLongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-            db.delete(l);
-            updateData();
+            Snackbar.make(view, "Are you sure you want to delete this entry?", Snackbar.LENGTH_LONG).setAction("Confirm", new SnackBarListener(l)).show();
             return true;
         }
     }

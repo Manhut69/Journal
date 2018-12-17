@@ -55,10 +55,11 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
     }
 
-    Cursor selectByID(long columnIndex) {
+    Cursor selectByID(long rowIndex) {
         SQLiteDatabase db = getWritableDatabase();
         String[] queryIds = new String[1];
-        queryIds[0] = Long.toString(columnIndex);
-        return db.rawQuery("SELECT * FROM 'entries' WHERE (rowid = ?);", queryIds);
+        queryIds[0] = Long.toString(rowIndex);
+        String sql = String.format("SELECT * FROM 'entries' WHERE (rowid = %d)", rowIndex);
+        return db.rawQuery(sql, null);
     }
 }
