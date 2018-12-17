@@ -16,28 +16,27 @@ public class InputActivity extends AppCompatActivity {
     }
 
     public void makeEntry(View v) {
-        Intent intent;
-
+        Intent intent = new Intent(InputActivity.this, MainActivity.class);
         switch (v.getId()) {
             case R.id.squidAngry:
-                je.setMood("angry");
+                intent.putExtra("mood", "angry");
                 break;
             case R.id.squidConfused:
-                je.setMood("confused");
+                intent.putExtra("mood", "confused");
                 break;
             case R.id.squidGlad:
-                je.setMood("glad");
+                intent.putExtra("mood", "glad");
                 break;
             case R.id.squidScared:
-                je.setMood("scared");
+                intent.putExtra("mood", "scared");
                 break;
         }
 
         EditText content =  findViewById(R.id.storyText);
+        intent.putExtra("content", content.getText().toString());
         EditText title = findViewById(R.id.titleText);
-        je.setContent(content.getText().toString());
-        je.setTitle(title.getText().toString());
-        EntryDatabase eb = new EntryDatabase();
-        eb.insert(je);
+        intent.putExtra("title", title.getText().toString());
+
+        startActivity(intent);
     }
 }

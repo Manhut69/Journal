@@ -2,6 +2,7 @@ package com.example.clintnieuwendijk.journal;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ResourceCursorAdapter;
@@ -13,16 +14,15 @@ public class EntryAdapter extends ResourceCursorAdapter {
         super(context, R.layout.entry_row, c, false);
     }
 
-//    @Override
-//    public JournalEntry getItem(Cursor cursor) {
-//        int id = cursor.getInt(cursor.getColumnIndex("_id"));
-//        String title = cursor.getString(cursor.getColumnIndex("title"));
-//        String content = cursor.getString(cursor.getColumnIndex("content"));
-//        String timestamp = cursor.getString(cursor.getColumnIndex("timestamp"));
-//        String mood = cursor.getString(cursor.getColumnIndex("mood"));
-//
-//        return new JournalEntry(id, title, content, timestamp, mood);
-//    }
+    public JournalEntry getItem(Cursor cursor) {
+        int id = cursor.getInt(cursor.getColumnIndex("_id"));
+        String title = cursor.getString(cursor.getColumnIndex("title"));
+        String content = cursor.getString(cursor.getColumnIndex("content"));
+        String timestamp = cursor.getString(cursor.getColumnIndex("timestamp"));
+        String mood = cursor.getString(cursor.getColumnIndex("mood"));
+
+        return new JournalEntry(id, title, content, timestamp, mood);
+    }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor){
@@ -32,6 +32,7 @@ public class EntryAdapter extends ResourceCursorAdapter {
         TextView timestamp = view.findViewById(R.id.timestamp);
         ImageView mood = view.findViewById(R.id.mood);
 
+        Log.d("_id", cursor.getString(cursor.getColumnIndex("_id")));
         title.setText(cursor.getString(cursor.getColumnIndex("title")));
         content.setText(cursor.getString(cursor.getColumnIndex("content")));
         timestamp.setText(cursor.getString(cursor.getColumnIndex("timestamp")));

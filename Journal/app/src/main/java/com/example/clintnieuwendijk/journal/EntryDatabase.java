@@ -24,13 +24,14 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
     public Cursor selectAll() {
         SQLiteDatabase db = getWritableDatabase();
-        return db.rawQuery("SELECT * FROM 'entries'", null);
+        return db.rawQuery("SELECT * FROM 'entries';", null);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE 'entries' ('_id' integer PRIMARY KEY AUTOINCREMENT NOT NULL, 'title' text, 'content' text, 'mood' text, 'timestamp' datetime DEFAULT CURRENT_TIMESTAMP)");
-        db.execSQL("INSERT INTO 'entries' ('_id','title','content','mood') VALUES (NULL,'Feeling angery!','Neighbors nagged about jellyfishing','angry')");
+        db.execSQL("CREATE TABLE 'entries' ('_id' integer PRIMARY KEY AUTOINCREMENT NOT NULL, 'title' text, 'content' text, 'mood' text, 'timestamp' text DEFAULT CURRENT_TIMESTAMP);");
+        db.execSQL("INSERT INTO 'entries' ('_id','title','content','mood') VALUES (NULL,'Feeling angery!','Neighbors nagged about jellyfishing','angry');");
+        db.execSQL("INSERT INTO 'entries' ('_id','title','content','mood') VALUES (NULL,'Glad!','Neighbors went on vacation','glad');");
     }
 
 
@@ -40,8 +41,24 @@ public class EntryDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(JournalEntry journalEntry) {
+    public void insert(JournalEntry je) {
         SQLiteDatabase db = getWritableDatabase();
-        db.rawQuery("INSERT INTO 'entries' ('_id', 'title', 'content', 'mood') VALUES (NULL, ?, ?, ?)", new String[] {journalEntry.getTitle(), journalEntry.getContent(), journalEntry.getMood()});
+        Log.d(je.getTitle(), je.getContent());
+        db.execSQL(String.format("INSERT INTO 'entries' ('title', 'content', 'mood') VALUES (\"%s\", \"%s\", '%s')", je.getTitle().replace("\"", "\'"), je.getContent().replace("\"", "\'"), je.getMood()));
+    }
+
+    public void delete(long id) {
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = String.format("DELETE FROM 'entries' WHERE (rowid = %d)", id);
+        Log.d("sql", sql);
+        db.execSQL(sql);
+
+    }
+
+    Cursor selectByID(long columnIndex) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] queryIds = new String[1];
+        queryIds[0] = Long.toString(columnIndex);
+        return db.rawQuery("SELECT * FROM 'entries' WHERE (rowid = ?);", queryIds);
     }
 }

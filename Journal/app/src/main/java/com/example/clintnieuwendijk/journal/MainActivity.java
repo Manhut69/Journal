@@ -7,23 +7,42 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    EntryDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EntryDatabase db = EntryDatabase.getInstance(getApplicationContext());
+        db = EntryDatabase.getInstance(getApplicationContext());
+
+        if (getIntent().getStringExtra("title") != null) {
+            String title = getIntent().getStringExtra("title");
+            String content = getIntent().getStringExtra("content");
+            String mood = getIntent().getStringExtra("mood");
+            JournalEntry je = new JournalEntry(0, title, content, mood, null);
+            db.insert(je);
+            Log.d(title, content);
+        }
+
+        updateData();
+
+    }
+
+    private void updateData() {
         Cursor allEntries = db.selectAll();
-        EntryAdapter entryAdapter = new EntryAdapter(this, allEntries);
         ListView lv = findViewById(R.id.mainListView);
+        EntryAdapter entryAdapter = new EntryAdapter(getApplicationContext(), allEntries);
+
         lv.setAdapter(entryAdapter);
         lv.setOnItemClickListener(new OnItemClickListener());
         lv.setOnItemLongClickListener(new OnItemLongClickListener());
+
     }
 
     public void createNewEntryClick(View v) {
@@ -39,17 +58,19 @@ public class MainActivity extends AppCompatActivity {
     private class OnItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Log.d("Itemclick", "Item clicked");
+            Log.d(Long.toString(l), Integer.toString(i));
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra("id", l);
+            startActivity(intent);
         }
     }
 
     private class OnItemLongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Log.d("Longclick", "Item clicked");
+            db.delete(l);
+            updateData();
             return true;
         }
     }
-
-
 }
