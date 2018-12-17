@@ -1,9 +1,10 @@
-# FriendsR
+# Journal
 
-A simple emoji rating app!
+A journal app
 
-[Emojis taken from the Noto emoji project](https://github.com/googlei18n/noto-emoji)
+The app displays journal entries with a moodboard
 
-Supports rating, scrolling and profile pages!
+When the button on the bottom right is pressed it prompts the user for a journal entry, afterwards, the list is then updated to display all the entries. 
 
-![](/data/screenshot.PNG) ![](/data/image.png)
+
+![](/data/screenshot0.jpg) ![](/data/screenshot1.jpg)
