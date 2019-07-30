@@ -1,3 +1,8 @@
+/*
+    A journal application for inputting text and emotions
+    By Clint Nieuwendijk
+ */
+
 package com.example.clintnieuwendijk.journal;
 
 import android.content.Intent;
@@ -14,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     EntryDatabase db;
 
+    // initialize the database and input journal entry if available
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // update ListView to display all entries
     private void updateData() {
         Cursor allEntries = db.selectAll();
         ListView lv = findViewById(R.id.mainListView);
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // go to entry creation
     public void createNewEntryClick(View v) {
         Intent intent = new Intent(MainActivity.this, InputActivity.class);
         startActivity(intent);
@@ -64,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // display item details
     private class OnItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -73,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // create confirmation SnackBar if an entry is longclicked
     private class OnItemLongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {

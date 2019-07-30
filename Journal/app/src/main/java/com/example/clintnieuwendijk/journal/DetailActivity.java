@@ -1,10 +1,8 @@
 package com.example.clintnieuwendijk.journal;
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +10,8 @@ import android.widget.TextView;
 public class DetailActivity extends AppCompatActivity {
 
     EntryDatabase db;
+
+    // request entry from database and display
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

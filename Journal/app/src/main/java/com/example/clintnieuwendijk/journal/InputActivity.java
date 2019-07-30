@@ -9,12 +9,14 @@ import android.widget.EditText;
 
 public class InputActivity extends AppCompatActivity {
 
+    // intialize input screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
     }
 
+    // create intent to make the main activity update the database
     public void makeEntry(View v) {
         Intent intent = new Intent(InputActivity.this, MainActivity.class);
         switch (v.getId()) {

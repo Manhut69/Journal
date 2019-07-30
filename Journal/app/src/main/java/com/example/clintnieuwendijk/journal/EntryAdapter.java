@@ -9,8 +9,12 @@ import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
 public class EntryAdapter extends ResourceCursorAdapter {
+    /*
+        A simple Adapter class to display entries from the database
+        It has basic functionality with getItem and bindView
+     */
 
-    public EntryAdapter(Context context, Cursor c) {
+    EntryAdapter(Context context, Cursor c) {
         super(context, R.layout.entry_row, c, false);
     }
 

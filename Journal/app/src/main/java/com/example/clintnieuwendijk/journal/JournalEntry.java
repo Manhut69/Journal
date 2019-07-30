@@ -3,10 +3,16 @@ package com.example.clintnieuwendijk.journal;
 import java.io.Serializable;
 
 public class JournalEntry implements Serializable {
+
+    /*
+        A JournalEntry class to work with the database
+        It has the basic getters and setters, as well as a regular constructor
+     */
+
     private int id;
     private String title, content, mood, timestamp;
 
-    public JournalEntry(int id, String title, String content, String mood, String timestamp) {
+    JournalEntry(int id, String title, String content, String mood, String timestamp) {
         this.id = id;
         this.title = title;
         this.content = content;
